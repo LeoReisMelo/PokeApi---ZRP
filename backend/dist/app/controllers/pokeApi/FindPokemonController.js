@@ -9,12 +9,10 @@ var _Pokeapi = require("../../../infrastructure/services/Pokeapi");
 class FindPokemon {
   constructor() {}
   async handle(request, response) {
-    console.log('chegou aqui');
     try {
       const {
         pokemon
       } = request.params;
-      console.log(pokemon);
       const pokeApiService = new _Pokeapi.PokeApi();
       const findPokemonUseCase = new _FindPokemonUseCase.FindPokemonUseCase(pokeApiService);
       const result = await findPokemonUseCase.execute(pokemon);
