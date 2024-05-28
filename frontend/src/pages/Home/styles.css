@@ -25,29 +25,29 @@
 
 .poke-container header {
   align-items: center;
-  margin-bottom: 20px; /* Adiciona espaçamento entre o cabeçalho e o topo */
+  margin-bottom: 20px;
 }
 
 .poke-container .header-selects {
-  margin-top: 20px; /* Adiciona espaçamento entre as caixas de seleção e o título */
-  text-align: center; /* Centraliza as caixas de seleção */
+  margin-top: 20px;
+  text-align: center;
 }
 
 .poke-container input[type="text"] {
   width: 100%;
-  padding: 10px; /* Adiciona preenchimento interno */
-  border-radius: 8px; /* Arredonda as bordas */
+  padding: 10px;
+  border-radius: 8px;
   margin-top: 10px;
 }
 
 .poke-container .header-selects {
-  margin-top: 20px; /* Adiciona espaçamento entre as caixas de seleção e o título */
-  text-align: center; /* Centraliza as caixas de seleção */
+  margin-top: 20px;
+  text-align: center;
 }
 
 .poke-container select {
-  margin-right: 10px; /* Adiciona espaçamento entre as caixas de seleção */
-  margin: 0 auto; /* Centraliza as caixas de seleção */
+  margin-right: 10px;
+  margin: 0 auto;
 }
 
 .poke-container ul {
@@ -80,12 +80,12 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 10px 10px; /* Adiciona espaçamento vertical entre os botões e os cards */
+  margin: 10px 10px;
 }
 
 .next:hover,
 .back:hover {
-  background-color: #a61f1f; /* Vermelho mais escuro ao passar o mouse */
+  background-color: #a61f1f;
 }
 
 .buttons-page {
@@ -118,17 +118,17 @@ li {
 }
 
 .poke-container select {
-  margin-right: 10px; /* Adiciona espaçamento entre as caixas de seleção */
-  margin: 0 auto; /* Centraliza as caixas de seleção */
-  background-color: #2f55b5; /* Define a cor de fundo */
-  color: white; /* Define a cor do texto */
-  border: none; /* Remove a borda */
-  border-radius: 5px; /* Adiciona borda arredondada */
-  padding: 8px 16px; /* Adiciona preenchimento interno */
+  margin-right: 10px;
+  margin: 0 auto;
+  background-color: #2f55b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
 }
 
 .poke-container select:last-child {
-  margin-right: 0; /* Remove o espaçamento à direita da última caixa de seleção */
+  margin-right: 0;
 }
 
 .header-selects {
