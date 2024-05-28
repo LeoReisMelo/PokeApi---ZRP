@@ -58,6 +58,14 @@ Logo após
     npm run serve
 ```
 
+## Docker
+
+```bash
+docker-compose up
+```
+
+Para criar um contâiner da sua aplicação na porta 3333
+
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).

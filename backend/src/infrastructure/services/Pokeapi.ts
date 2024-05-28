@@ -1,16 +1,19 @@
 import axios from "axios";
 import { PokemonListResponse } from "~/app/contracts/responses/AllPokemonsContract";
 import { AbilityListResponse } from "~/app/contracts/responses/FindPokemonContract";
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 export class PokeApi {
   async allPokemons(limit: number, page: number): Promise<PokemonListResponse> {
-    const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${page}`);
+    const { data } = await axios.get(`${process.env.POKEAPI_URL}?limit=${limit}&offset=${page}`);
 
     return data;
   }
 
   async findPokemonAbilities(pokemon: string): Promise<AbilityListResponse> {
-    const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+    const { data } = await axios.get(`${process.env.POKEAPI_URL}/${pokemon}`);
 
     let ability;
 
