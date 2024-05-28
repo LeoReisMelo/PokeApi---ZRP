@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/navBar';
 import Routes from './routes';
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <Navbar />

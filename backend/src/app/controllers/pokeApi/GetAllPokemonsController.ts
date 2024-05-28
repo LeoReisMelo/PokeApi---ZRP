@@ -9,11 +9,15 @@ export class GetAllPokemons implements Controller {
   async handle(request: Request, response: Response) {
     try {
       const { page } = request.params;
+      const { limit } = request.query;
 
       const pokeApiService = new PokeApi();
       const getAllPokemonsUseCase = new GetAllPokemonsUseCase(pokeApiService);
 
-      const pokemons = await getAllPokemonsUseCase.execute(Number(page));
+      const pokemons = await getAllPokemonsUseCase.execute(
+        Number(page),
+        Number(limit)
+      );
 
       response.status(200).json(pokemons);
     } catch (error: any) {

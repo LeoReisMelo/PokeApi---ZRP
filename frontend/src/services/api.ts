@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-const api = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2/'
+const api: AxiosInstance = axios.create({
+    baseURL: 'http://localhost:3333/'
 });
 
 export default api;
