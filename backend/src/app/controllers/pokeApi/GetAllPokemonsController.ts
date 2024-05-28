@@ -12,9 +12,6 @@ export class ListAllPokemons implements Controller {
       const { page } = request.params
       const { limit } = request.query
 
-      console.log(request.params);
-      console.log(page);
-
       if (isNaN(Number(page)) || !Number(limit)) {
         throw new ErrorHandler(400, 'Invalid parameters')
       }
