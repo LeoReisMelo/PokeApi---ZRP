@@ -1,15 +1,15 @@
 import axios from "axios";
 
 export class PokeApi {
-  async allPokemons() {
-    const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon");
+  async allPokemons(page: number) {
+    const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=${page}`);
 
     return data;
   }
 
-  async findPokemon(pokemon: string) {
+  async findPokemonAbilities(pokemon: string) {
     const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
 
-    return data;
+    return data.abilities;
   }
 }

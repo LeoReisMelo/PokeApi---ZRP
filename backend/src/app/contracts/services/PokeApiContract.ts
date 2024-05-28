@@ -1,4 +1,4 @@
 export default interface PokeApiServiceContract {
-  allPokemons: () => any
-  findPokemon: (pokemon: string) => any
+  allPokemons: (page: number) => any
+  findPokemonAbilities: (pokemon: string) => any
 }

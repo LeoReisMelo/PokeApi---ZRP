@@ -1,1 +1,0 @@
-{"version":3,"file":"PokeApiContract.js","names":[],"sources":["../../../../src/app/contracts/services/PokeApiContract.ts"],"sourcesContent":["export default interface PokeApiServiceContract {\n  allPokemons: () => any\n  findPokemon: (pokemon: string) => any\n}\n"],"mappings":"","ignoreList":[]}

@@ -23,5 +23,8 @@
     }
   },
   "include": ["./src/**/*", "./tests/**/*"],
-  "exclude": ["node_modules", ".vscode/**/*"]
+  "exclude": ["node_modules", ".vscode/**/*"],
+  "scripts": {
+    "start": "ts-node-dev -r tsconfig-paths/register src/index.ts"
+  }
 }

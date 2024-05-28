@@ -1,1 +1,0 @@
-{"version":3,"file":"Controller.js","names":[],"sources":["../../../src/app/controllers/Controller.ts"],"sourcesContent":["import { Request, Response } from 'express';\n\nexport interface Controller {\n  handle(request: Request, response: Response): Promise<any>;\n}\n"],"mappings":"","ignoreList":[]}
