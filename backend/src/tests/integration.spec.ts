@@ -19,7 +19,7 @@ describe('Integration tests for GetAllPokemons and FindPokemon', () => {
   });
 
   it('should get all pokemons', async () => {
-    const response = await axios.get('http://localhost:3333/pokemon/all/1');
+    const response = await axios.get('http://localhost:3333/pokemon/all/1?limit=10');
     expect(response.status).toBe(200);
     expect(response.data.results).toBeDefined();
   });

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetAllPokemonsUseCase } from "~/app/useCases/pokeApi/GetAllPokemonsUseCase";
+import { ListAllPokemonsUseCase } from "~/app/useCases/pokeApi/GetAllPokemonsUseCase";
 import { PokeApi } from "~/infrastructure/services/Pokeapi";
 
 jest.mock("axios");
@@ -18,7 +18,7 @@ describe("GetAllPokemonsUseCase", () => {
     });
 
     const pokeApiService = new PokeApi();
-    const getAllPokemonsUseCase = new GetAllPokemonsUseCase(pokeApiService);
+    const getAllPokemonsUseCase = new ListAllPokemonsUseCase(pokeApiService);
 
     const pokemons = await getAllPokemonsUseCase.execute(1, 10);
 

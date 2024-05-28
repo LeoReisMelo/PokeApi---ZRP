@@ -1,29 +1,42 @@
-import { Controller } from "../Controller";
-import { Request, Response } from "express";
-import { GetAllPokemonsUseCase } from "~/app/useCases/pokeApi/GetAllPokemonsUseCase";
-import { PokeApi } from "~/infrastructure/services/Pokeapi";
+import { Controller } from '../Controller'
+import { Request, Response } from 'express'
+import { ListAllPokemonsUseCase } from '~/app/useCases/pokeApi/GetAllPokemonsUseCase'
+import { ErrorHandler } from '~/helpers/errorHandler'
+import { PokeApi } from '~/infrastructure/services/Pokeapi'
 
-export class GetAllPokemons implements Controller {
+export class ListAllPokemons implements Controller {
   constructor() {}
 
   async handle(request: Request, response: Response) {
     try {
-      const { page } = request.params;
-      const { limit } = request.query;
+      const { page } = request.params
+      const { limit } = request.query
 
-      const pokeApiService = new PokeApi();
-      const getAllPokemonsUseCase = new GetAllPokemonsUseCase(pokeApiService);
+      console.log(request.params);
+      console.log(page);
 
-      const pokemons = await getAllPokemonsUseCase.execute(
+      if (isNaN(Number(page)) || !Number(limit)) {
+        throw new ErrorHandler(400, 'Invalid parameters')
+      }
+
+      const pokeApiService = new PokeApi()
+      const listAllPokemonsUseCase = new ListAllPokemonsUseCase(pokeApiService)
+
+      const pokemons = await listAllPokemonsUseCase.execute(
         Number(page),
-        Number(limit)
-      );
+        Number(limit),
+      )
 
-      response.status(200).json(pokemons);
+      response.status(200).json(pokemons)
     } catch (error: any) {
-      console.error({ error });
+      console.error({ error })
 
-      return response.status(500).json({ error: "Internal server error" });
+      if (error instanceof ErrorHandler) {
+        response.status(error.statusCode).json({ error: error.message })
+      } else {
+        console.error('Unexpected error:', error)
+        response.status(500).json({ error: 'Internal server error' })
+      }
     }
   }
 }

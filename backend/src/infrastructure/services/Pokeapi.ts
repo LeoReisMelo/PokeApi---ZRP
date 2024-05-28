@@ -1,26 +1,31 @@
-import axios from "axios";
-import { PokemonListResponse } from "~/app/contracts/responses/AllPokemonsContract";
-import { AbilityListResponse } from "~/app/contracts/responses/FindPokemonContract";
-import dotenv from 'dotenv';
+import { PokemonListResponse } from '~/app/contracts/responses/AllPokemonsContract'
+import dotenv from 'dotenv'
+import axios from 'axios';
 
 dotenv.config()
 
 export class PokeApi {
   async allPokemons(limit: number, page: number): Promise<PokemonListResponse> {
-    const { data } = await axios.get(`${process.env.POKEAPI_URL}?limit=${limit}&offset=${page}`);
+    try {
+      const { data } = await axios.get(
+        `${process.env.POKEAPI_URL}?limit=${limit}&offset=${page}`,
+      )
 
-    return data;
+      return data
+    } catch (error: any) {
+      throw new Error(`Failed to fetch all Pokemons: ${error.message}`);
+    }
   }
 
-  async findPokemonAbilities(pokemon: string): Promise<AbilityListResponse> {
-    const { data } = await axios.get(`${process.env.POKEAPI_URL}/${pokemon}`);
+  async findPokemonAbilities(pokemon: string): Promise<Array<string>> {
+    try {
+      const { data } = await axios.get<{
+        abilities: { ability: { name: string } }[]
+      }>(`${process.env.POKEAPI_URL}/${pokemon}`)
 
-    let ability;
-
-    if (data.abilities) {
-       ability = data.abilities.map((result: any) => result.ability);
+      return data.abilities.map((ability) => ability.ability.name).sort()
+    } catch (error: any) {
+      throw new Error(`Failed to fetch abilities for Pokemon ${pokemon}: ${error.message}`);
     }
-
-    return ability.map((result: any) => result.name).sort((a: string, b: string) => a.localeCompare(b));
   }
 }
