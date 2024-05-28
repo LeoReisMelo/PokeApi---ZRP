@@ -3,6 +3,7 @@ import "../../global.css";
 import "./styles.css";
 import api from "../../services/api";
 import PokemonListItem from "../../components/pokemonListItem";
+import { MdCatchingPokemon } from "react-icons/md";
 
 interface Pokemon {
   id: string;
@@ -20,8 +21,9 @@ const ListPokemon: React.FC = () => {
   const [pagesTotal, setPagesTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
-  const [limit, setLimit] = useState<number>(10); // Alterado para limit
+  const [limit, setLimit] = useState<number>(10);
   const [sortOrder, setSortOrder] = useState<string>("default");
+  const [filter, setFilter] = useState<string>("");
 
   async function loadPokemons() {
     if (loading) {
@@ -31,7 +33,7 @@ const ListPokemon: React.FC = () => {
     setLoading(true);
     try {
       const response = await api.get(
-        `pokemon/all/${page * limit}?limit=${limit}` // Alterado para limit
+        `pokemon/all/${page * limit}?limit=${limit}`
       );
 
       let pokemonsData = await Promise.all(
@@ -60,6 +62,12 @@ const ListPokemon: React.FC = () => {
         pokemonsData.sort((a, b) => b.name.localeCompare(a.name));
       }
 
+      if (filter) {
+        pokemonsData = pokemonsData.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(filter.toLowerCase())
+        );
+      }
+
       setAllPokemons(pokemonsData);
       setTotal(response.data.count);
       setTotalPagesToAlter(response.data.count);
@@ -73,7 +81,7 @@ const ListPokemon: React.FC = () => {
   function setTotalPagesToAlter(total: number) {
     let calc = 0;
     if (total > 0) {
-      calc = Math.ceil(total / limit); // Alterado para limit
+      calc = Math.ceil(total / limit);
     }
     setPagesTotal(calc);
   }
@@ -88,8 +96,12 @@ const ListPokemon: React.FC = () => {
     setPage(page - 1);
   }
 
+  function handleAbilitiesButtonClick() {
+    window.location.href = "/abilities";
+  }
+
   function handlePageSizeChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    setLimit(parseInt(event.target.value)); // Alterado para limit
+    setLimit(parseInt(event.target.value));
     setPage(0);
   }
 
@@ -97,9 +109,13 @@ const ListPokemon: React.FC = () => {
     setSortOrder(event.target.value);
   }
 
+  function handleFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setFilter(event.target.value);
+  }
+
   useEffect(() => {
     loadPokemons();
-  }, [page, limit, sortOrder]); // Alterado para limit e sortOrder
+  }, [page, limit, sortOrder, filter]);
 
   return (
     <div className="poke-container">
@@ -107,7 +123,6 @@ const ListPokemon: React.FC = () => {
         <h1>Bem-vindo a sua pokedex!</h1>
         <div className="header-selects">
           <select value={limit} onChange={handlePageSizeChange}>
-            {" "}
             <option value={10}>10 - Pokemons</option>
             <option value={20}>20 - Pokemons</option>
             <option value={40}>40 - Pokemons</option>
@@ -121,6 +136,20 @@ const ListPokemon: React.FC = () => {
             <option value="Z-A">Z-A</option>
           </select>
         </div>
+        <input
+          type="text"
+          placeholder="Filtrar pokémons..."
+          value={filter}
+          onChange={handleFilterChange}
+        />
+        <div className="button-container">
+          <button
+            className="abilities-button"
+            onClick={handleAbilitiesButtonClick}
+          >
+            <MdCatchingPokemon /> Habilidades
+          </button>
+        </div>
       </header>
       <section className="section-poke">
         {allPokemons.map((pokemon) => (
@@ -132,6 +161,7 @@ const ListPokemon: React.FC = () => {
             abilities={pokemon.abilities}
           />
         ))}
+        {allPokemons.length === 0 && <p>Nenhum pokémon encontrado.</p>}
       </section>
       <div className="buttons-page">
         <button className="button back" onClick={setPreviusPage}>

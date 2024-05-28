@@ -1,7 +1,12 @@
 .poke-container {
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.poke-container h1 {
+  margin-top: 20px;
 }
 
 .logo-poke {
@@ -20,7 +25,19 @@
 
 .poke-container header {
   align-items: center;
-  margin-top: 20px; /* Adiciona espaçamento entre o cabeçalho e o topo */
+  margin-bottom: 20px; /* Adiciona espaçamento entre o cabeçalho e o topo */
+}
+
+.poke-container .header-selects {
+  margin-top: 20px; /* Adiciona espaçamento entre as caixas de seleção e o título */
+  text-align: center; /* Centraliza as caixas de seleção */
+}
+
+.poke-container input[type="text"] {
+  width: 100%;
+  padding: 10px; /* Adiciona preenchimento interno */
+  border-radius: 8px; /* Arredonda as bordas */
+  margin-top: 10px;
 }
 
 .poke-container .header-selects {
@@ -117,14 +134,39 @@ li {
 .header-selects {
   display: flex;
   justify-content: center;
-  align-items: center; /* Centraliza na vertical */
+  align-items: center;
 }
 
 .header-selects select {
-  margin: 0 5px; /* Adiciona um pequeno espaço entre as caixas de seleção */
-  background-color: #2f55b5; /* Define a cor de fundo */
-  color: white; /* Define a cor do texto */
-  border: none; /* Remove a borda */
-  border-radius: 5px; /* Adiciona borda arredondada */
-  padding: 8px 16px; /* Adiciona preenchimento interno */
+  margin: 0 5px;
+  background-color: #2f55b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+
+.abilities-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #f2c31a;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  margin-top: 20px;
+}
+
+.abilities-button:focus {
+  outline: none;
+}
+
+.abilities-button:hover {
+  background-color: #d4ac17;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
